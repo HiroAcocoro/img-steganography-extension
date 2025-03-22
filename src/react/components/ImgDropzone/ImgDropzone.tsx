@@ -1,5 +1,6 @@
 import { FC, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import "./ImgDropzone.css";
 
 const ImgDropzone: FC = () => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -15,14 +16,16 @@ const ImgDropzone: FC = () => {
   });
 
   return (
-    <div {...getRootProps()}>
-      <input {...getInputProps()} />
-      {isDragActive ? (
-        <p>Drop the files here ...</p>
-      ) : (
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      )}
-    </div>
+    <section className="dropzone-container">
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p>Drop the files here ...</p>
+        ) : (
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        )}
+      </div>
+    </section>
   );
 };
 

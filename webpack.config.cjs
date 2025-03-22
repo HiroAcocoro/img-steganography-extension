@@ -49,6 +49,10 @@ module.exports = {
         resolve: {
           fullySpecified: false
         }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ],
   },
