@@ -7,7 +7,7 @@ const ImgDropzone: FC = () => {
     alert(acceptedFiles);
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     maxFiles: 1,
     accept: {
@@ -19,11 +19,7 @@ const ImgDropzone: FC = () => {
     <section className="dropzone-container">
       <div {...getRootProps()}>
         <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop the files here ...</p>
-        ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
-        )}
+        <p>Drag 'n' drop some files here, or click to select files</p>
       </div>
     </section>
   );
