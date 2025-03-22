@@ -1,0 +1,15 @@
+# Env files
+*.env
+*.env.local
+
+# dependencies
+/node_modules
+
+# testing
+
+# production
+/dist
+
+# misc
+.DS_Store
+*.pem
