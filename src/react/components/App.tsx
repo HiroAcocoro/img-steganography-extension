@@ -1,4 +1,5 @@
 import { FC } from "react";
+import ImgDropzone from "./ImgDropzone/ImgDropzone";
 
 const testFunction = async () => {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -11,6 +12,7 @@ const App: FC = () => {
   return (
     <main>
       <h1>test</h1>
+      <ImgDropzone />
       <button onClick={testFunction}>Test Btn</button>
     </main>
   );
