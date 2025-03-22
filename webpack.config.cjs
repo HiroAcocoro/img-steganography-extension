@@ -10,7 +10,8 @@ module.exports = {
     background: "./src/background/index.ts",
     react: "./src/react/index.tsx"
   },
-  output: { path: path.resolve(__dirname, "dist"),
+  output: { 
+    path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
     clean: true,
   },
@@ -30,7 +31,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.(ts|tsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -43,9 +44,21 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.js$/,
+        resolve: {
+          fullySpecified: false
+        }
+      }
     ],
   },
   resolve: {
-    extensions: [".ts", ".tsx"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    fallback: {
+      "path": require.resolve("path-browserify"),
+      "stream": require.resolve("stream-browserify"),
+      "buffer": require.resolve("buffer/"),
+      "util": require.resolve("util/")
+    }
   },
 };
