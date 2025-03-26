@@ -3,7 +3,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  mode: "production",
+  mode: process.env.NODE_ENV === "development" ? "development" : "production",
   target: "web",
   entry: {
     contentScript: "./src/content/index.ts",
@@ -14,6 +14,14 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
     clean: true,
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+    hot: true,
+    compress: true,
+    port: 3000,
   },
   plugins: [
     new HtmlWebpackPlugin({
