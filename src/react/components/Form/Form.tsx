@@ -8,7 +8,7 @@ const Form: FC<TFormProps> = ({ onSubmit }) => {
   return (
     <form onSubmit={onSubmit}>
       <label>key</label>
-      <input type="password" id="key" name="key" />
+      <input type="password" id="key" name="key" required />
 
       <label>password</label>
       <input type="password" id="password" name="password" />

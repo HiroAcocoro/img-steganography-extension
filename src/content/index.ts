@@ -1,3 +1,3 @@
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-  alert(msg);
+chrome.runtime?.onMessage.addListener(function (msg, sender, sendResponse) {
+  if (msg) alert(msg);
 });

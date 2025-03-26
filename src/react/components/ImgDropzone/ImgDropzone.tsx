@@ -1,10 +1,14 @@
-import { FC, useCallback } from "react";
+import { Dispatch, FC, SetStateAction, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import "./ImgDropzone.css";
 
-const ImgDropzone: FC = () => {
+type ImgDropzoneProps = {
+  setImg: Dispatch<SetStateAction<Blob | undefined>>;
+}
+
+const ImgDropzone: FC<ImgDropzoneProps> = ({ setImg }) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    alert(acceptedFiles);
+    setImg(acceptedFiles[0]);
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
