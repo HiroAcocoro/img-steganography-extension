@@ -46,6 +46,14 @@ const App: FC = () => {
     processImage(encryptedPassword.toString());
   };
 
+  const openEncryptedImgInNewTab = () => {
+    if (!processedImage) {
+      alert("No processed image to open");
+      return;
+    }
+    window.open(URL.createObjectURL(processedImage), "_blank");
+  };
+
   const testDecryptPassword = async (key = "test") => {
     if (!processedImage) {
       console.log("No processed image to decrypt");
@@ -68,7 +76,7 @@ const App: FC = () => {
       <h1>Image Password</h1>
       <ImgDropzone img={img} setImg={setImg} />
       <BtnEncryptedImg
-        onClickEncryptedImg={() => {}}
+        onClickEncryptedImg={openEncryptedImgInNewTab}
         isImgProcessed={Boolean(processedImage)}
       />
       <Form onSubmit={encryptPassword} />
