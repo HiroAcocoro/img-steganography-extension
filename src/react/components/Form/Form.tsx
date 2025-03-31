@@ -1,4 +1,5 @@
 import { FC } from "react";
+import "./Form.css";
 
 type TFormProps = {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -6,18 +7,27 @@ type TFormProps = {
 
 const Form: FC<TFormProps> = ({ onSubmit }) => {
   return (
-    <form onSubmit={onSubmit}>
-      <label>key</label>
-      <input type="password" id="key" name="key" required />
+    <div className="form-container">
+      <form onSubmit={onSubmit}>
+        <input type="password" id="key" name="key" required placeholder="Key" />
 
-      <label>password</label>
-      <input type="password" id="password" name="password" />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+        />
 
-      <label>confirm password</label>
-      <input type="password" id="confirmPassword" name="confirmPassword" />
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm password"
+        />
 
-      <input type="submit" value="Submit" />
-    </form>
+        <input type="submit" value="Encrypt" />
+      </form>
+    </div>
   );
 };
 

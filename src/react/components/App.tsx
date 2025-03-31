@@ -19,7 +19,7 @@ const App: FC = () => {
     const binaryPassword = textToBinary(encryptedPassword);
     const processedImage = await embedLSB(img, binaryPassword);
     setProcessedImage(processedImage);
-  }
+  };
 
   const encryptPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,20 +27,23 @@ const App: FC = () => {
     const key = formData.get("key");
     const password = formData.get("password");
     const confirmPassword = formData.get("confirmPassword");
-  
+
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-  
-    if (!key || !password || !confirmPassword) { 
+
+    if (!key || !password || !confirmPassword) {
       alert("Please fill in all fields");
       return;
     }
-  
-    const encryptedPassword = CryptoJS.AES.encrypt(password.toString(), key.toString());
+
+    const encryptedPassword = CryptoJS.AES.encrypt(
+      password.toString(),
+      key.toString(),
+    );
     processImage(encryptedPassword.toString());
-  }
+  };
 
   const testDecryptPassword = async (key = "test") => {
     if (!processedImage) {
@@ -53,18 +56,23 @@ const App: FC = () => {
     const encryptedString = binaryToText(binaryData);
     // Decrypt the string
     const decryptedPassword = CryptoJS.AES.decrypt(encryptedString, key);
-    const decryptedPasswordString = decryptedPassword.toString(CryptoJS.enc.Utf8);
+    const decryptedPasswordString = decryptedPassword.toString(
+      CryptoJS.enc.Utf8,
+    );
     console.log("Decrypted password:", decryptedPasswordString);
-  }
+  };
 
-  
   return (
     <main>
-      <h1>test</h1>
-      {img ? <img src={URL.createObjectURL(img)} alt="original" /> : <ImgDropzone setImg={setImg} />}
+      <h1>Image Password</h1>
+      <ImgDropzone img={img} setImg={setImg} onClickEncryptedImg={() => {}} />
       <Form onSubmit={encryptPassword} />
-      {processedImage && <img src={URL.createObjectURL(processedImage)} alt="processed" />}
-      <button onClick={() => testDecryptPassword()}>test decrypt password</button>
+      {processedImage && (
+        <img src={URL.createObjectURL(processedImage)} alt="processed" />
+      )}
+      <button onClick={() => testDecryptPassword()}>
+        test decrypt password
+      </button>
     </main>
   );
 };
