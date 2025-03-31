@@ -3,18 +3,18 @@ import "./BtnEncryptedImg.css";
 
 type BtnEncryptedImgProps = {
   isImgProcessed: boolean;
-  onClickEncryptedImg: () => void;
+  downloadEncryptedImg: () => void;
 };
 
 const BtnEncryptedImg: FC<BtnEncryptedImgProps> = ({
   isImgProcessed,
-  onClickEncryptedImg,
+  downloadEncryptedImg,
 }) => {
   if (!isImgProcessed) return null;
 
   return (
     <div className="img-decrypted-container">
-      <button className="img-decrypted" onClick={onClickEncryptedImg}>
+      <button className="img-decrypted" onClick={downloadEncryptedImg}>
         <span className="material-symbols-outlined">image</span>
         Encrypted image
       </button>

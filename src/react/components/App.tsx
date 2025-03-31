@@ -11,6 +11,7 @@ import BtnEncryptedImg from "./BtnEncryptedImg/BtnEncryptedImg";
 const App: FC = () => {
   const [img, setImg] = useState<Blob>();
   const [processedImage, setProcessedImage] = useState<Blob>();
+  const [keyState, setKeyState] = useState("");
 
   const processImage = async (encryptedPassword: string) => {
     if (!img) {
@@ -46,29 +47,32 @@ const App: FC = () => {
     processImage(encryptedPassword.toString());
   };
 
-  const openEncryptedImgInNewTab = () => {
+  const downloadEncryptedImg = () => {
     if (!processedImage) {
-      alert("No processed image to open");
+      alert("No processed image to download");
       return;
     }
-    window.open(URL.createObjectURL(processedImage), "_blank");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(processedImage);
+    a.download = `${(img as File).name}.png`;
+    a.click();
   };
 
-  const testDecryptPassword = async (key = "test") => {
-    if (!processedImage) {
-      console.log("No processed image to decrypt");
+  const decryptImg = async () => {
+    if (!img) {
+      alert("No image to decrypt");
       return;
     }
     // Convert the processed image to binary data
-    const binaryData = await extractLSB(processedImage);
+    const binaryData = await extractLSB(img);
     // Convert binary to string
     const encryptedString = binaryToText(binaryData);
     // Decrypt the string
-    const decryptedPassword = CryptoJS.AES.decrypt(encryptedString, key);
+    const decryptedPassword = CryptoJS.AES.decrypt(encryptedString, keyState);
     const decryptedPasswordString = decryptedPassword.toString(
       CryptoJS.enc.Utf8,
     );
-    console.log("Decrypted password:", decryptedPasswordString);
+    alert(decryptedPasswordString);
   };
 
   return (
@@ -76,16 +80,17 @@ const App: FC = () => {
       <h1>Image Password</h1>
       <ImgDropzone img={img} setImg={setImg} />
       <BtnEncryptedImg
-        onClickEncryptedImg={openEncryptedImgInNewTab}
+        downloadEncryptedImg={downloadEncryptedImg}
         isImgProcessed={Boolean(processedImage)}
       />
-      <Form onSubmit={encryptPassword} />
+      <Form
+        onSubmit={encryptPassword}
+        setKeyState={setKeyState}
+        decryptImg={decryptImg}
+      />
       {processedImage && (
         <img src={URL.createObjectURL(processedImage)} alt="processed" />
       )}
-      <button onClick={() => testDecryptPassword()}>
-        test decrypt password
-      </button>
     </main>
   );
 };
