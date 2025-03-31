@@ -6,6 +6,7 @@ import embedLSB from "../../utils/embedLSB";
 import textToBinary from "../../utils/textToBinary";
 import extractLSB from "../../utils/extractLSB";
 import binaryToText from "../../utils/binaryToText";
+import BtnEncryptedImg from "./BtnEncryptedImg/BtnEncryptedImg";
 
 const App: FC = () => {
   const [img, setImg] = useState<Blob>();
@@ -65,7 +66,11 @@ const App: FC = () => {
   return (
     <main>
       <h1>Image Password</h1>
-      <ImgDropzone img={img} setImg={setImg} onClickEncryptedImg={() => {}} />
+      <ImgDropzone img={img} setImg={setImg} />
+      <BtnEncryptedImg
+        onClickEncryptedImg={() => {}}
+        isImgProcessed={Boolean(processedImage)}
+      />
       <Form onSubmit={encryptPassword} />
       {processedImage && (
         <img src={URL.createObjectURL(processedImage)} alt="processed" />
