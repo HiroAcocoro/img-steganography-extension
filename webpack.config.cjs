@@ -1,5 +1,5 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin"); 
-const CopyPlugin = require("copy-webpack-plugin"); 
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 module.exports = {
@@ -8,9 +8,9 @@ module.exports = {
   entry: {
     contentScript: "./src/content/index.ts",
     background: "./src/background/index.ts",
-    react: "./src/react/index.tsx"
+    react: "./src/react/index.tsx",
   },
-  output: { 
+  output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
     clean: true,
@@ -55,22 +55,22 @@ module.exports = {
       {
         test: /\.js$/,
         resolve: {
-          fullySpecified: false
-        }
+          fullySpecified: false,
+        },
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
     fallback: {
-      "path": require.resolve("path-browserify"),
-      "stream": require.resolve("stream-browserify"),
-      "buffer": require.resolve("buffer/"),
-      "util": require.resolve("util/")
-    }
+      path: require.resolve("path-browserify"),
+      stream: require.resolve("stream-browserify"),
+      buffer: require.resolve("buffer/"),
+      util: require.resolve("util/"),
+    },
   },
 };
