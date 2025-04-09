@@ -1,5 +1,6 @@
 import extractLSB from "./extractLSB";
 import binaryToText from "./binaryToText";
+import CryptoJS from "crypto-js";
 
 const decryptImg = async (
   img: Blob | undefined,
