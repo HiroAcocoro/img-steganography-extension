@@ -57,8 +57,12 @@ const App: FC = () => {
     a.click();
   };
 
-  const handleDecryption = () => {
-    const decryptedPassword = decryptImg(img, keyState);
+  const handleDecryption = async () => {
+    if (!img) {
+      alert("Please select an image");
+      return;
+    }
+    const decryptedPassword = await decryptImg(img, keyState);
     alert(decryptedPassword);
   };
 
@@ -75,9 +79,6 @@ const App: FC = () => {
         setKeyState={setKeyState}
         decryptImg={handleDecryption}
       />
-      {processedImage && (
-        <img src={URL.createObjectURL(processedImage)} alt="processed" />
-      )}
     </main>
   );
 };
