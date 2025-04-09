@@ -4,9 +4,8 @@ import Form from "./Form/Form";
 import CryptoJS from "crypto-js";
 import embedLSB from "../../utils/embedLSB";
 import textToBinary from "../../utils/textToBinary";
-import extractLSB from "../../utils/extractLSB";
-import binaryToText from "../../utils/binaryToText";
 import BtnEncryptedImg from "./BtnEncryptedImg/BtnEncryptedImg";
+import decryptImg from "../../utils/decryptImg";
 
 const App: FC = () => {
   const [img, setImg] = useState<Blob>();
@@ -58,21 +57,9 @@ const App: FC = () => {
     a.click();
   };
 
-  const decryptImg = async () => {
-    if (!img) {
-      alert("No image to decrypt");
-      return;
-    }
-    // Convert the processed image to binary data
-    const binaryData = await extractLSB(img);
-    // Convert binary to string
-    const encryptedString = binaryToText(binaryData);
-    // Decrypt the string
-    const decryptedPassword = CryptoJS.AES.decrypt(encryptedString, keyState);
-    const decryptedPasswordString = decryptedPassword.toString(
-      CryptoJS.enc.Utf8,
-    );
-    alert(decryptedPasswordString);
+  const handleDecryption = () => {
+    const decryptedPassword = decryptImg(img, keyState);
+    alert(decryptedPassword);
   };
 
   return (
@@ -86,7 +73,7 @@ const App: FC = () => {
       <Form
         onSubmit={encryptPassword}
         setKeyState={setKeyState}
-        decryptImg={decryptImg}
+        decryptImg={handleDecryption}
       />
       {processedImage && (
         <img src={URL.createObjectURL(processedImage)} alt="processed" />

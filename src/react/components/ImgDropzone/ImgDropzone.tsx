@@ -7,7 +7,7 @@ type ImgDropzoneProps = {
   setImg: Dispatch<SetStateAction<Blob | undefined>>;
 };
 
-const ImgDropzone: FC<ImgDropzoneProps> = ({ img, setImg, decryptImg }) => {
+const ImgDropzone: FC<ImgDropzoneProps> = ({ img, setImg }) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setImg(acceptedFiles[0]);
   }, []);
