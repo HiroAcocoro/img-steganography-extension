@@ -51,7 +51,7 @@ if (
           const files = (e.target as HTMLInputElement).files;
           if (files && files.length > 0) {
             const password = await extractPasswordFromImg(files[0]);
-            injectPasswordToInput(input, password);
+            if (password) injectPasswordToInput(input, password);
           }
         });
 
@@ -98,7 +98,7 @@ if (
           const files = e.dataTransfer?.files;
           if (files && files.length > 0) {
             const password = await extractPasswordFromImg(files[0]);
-            injectPasswordToInput(input, password);
+            if (password) injectPasswordToInput(input, password);
           }
         });
 

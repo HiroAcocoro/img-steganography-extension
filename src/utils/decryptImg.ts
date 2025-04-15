@@ -5,10 +5,10 @@ import CryptoJS from "crypto-js";
 const decryptImg = async (
   img: Blob | undefined,
   key: string,
-): Promise<string> => {
+): Promise<string | undefined> => {
   if (!img) {
     alert("No image to decrypt");
-    return "";
+    return undefined;
   }
   // Convert the processed image to binary data
   const binaryData = await extractLSB(img);
