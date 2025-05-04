@@ -1,1 +1,1 @@
-Chrome extension for embedding an encrypted password inside an image
+Chrome extension for embedding encrypted password inside an image.
