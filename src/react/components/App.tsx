@@ -53,7 +53,7 @@ const App: FC = () => {
     }
     const a = document.createElement("a");
     a.href = URL.createObjectURL(processedImage);
-    a.download = `${(img as File).name}.png`;
+    a.download = (img as File).name;
     a.click();
   };
 
