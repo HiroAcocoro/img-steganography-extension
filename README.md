@@ -6,7 +6,7 @@ Chrome extension for embedding encrypted password inside an image.
 
 ## Features
 
- - Embed password inside images replacing Lease-Significant Bits (LSB) with the encrypted password bits. This means images will have no noticeable changes making it discreet.
+ - Embed password inside images replacing Least-Significant Bits (LSB) with the encrypted password bits. This means images will have no noticeable changes making it discreet.
  - Decrypt images with embedded passwords.
  - Drag and Drop images with password directly into password fields to extract and fill passwords.
 ##
